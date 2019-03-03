@@ -4,22 +4,22 @@
 
 This repo contains a minimalist [Flask](http://flask.pocoo.org/docs/1.0/) redirect server.
 
-The redirect rules are initally loaded from the source files listed in the `REDIRECT_SOURCES` in file [general_conf.py](https://github.com/oscar6echo/redirect-server-2/blob/master/src/conf/general_conf.py) and updated every `REFRESH_SECONDS` (defined in the same file) seconds.
+The redirect rules are initally loaded from the source files listed in the `REDIRECT_SOURCES` in file [general_conf.py](https://github.com/oscar6echo/redirect-server/blob/master/src/conf/general_conf.py) and updated every `REFRESH_SECONDS` (defined in the same file) seconds.
 
 Each redirect rule consists of:
-+ A [regex](https://www.regular-expressions.info/) to match short urls
-+ A route i.e. a corresponding [replacement string](https://www.regular-expressions.info/replacetutorial.html)
-+ A source file from where the rule is read
+
+- A [regex](https://www.regular-expressions.info/) to match short urls
+- A route i.e. a corresponding [replacement string](https://www.regular-expressions.info/replacetutorial.html)
+- A source file from where the rule is read
 
 Redirect rules are ordered by
-+ source file - see examples [redirect-rules-1.json](https://github.com/oscar6echo/redirect-server-2/blob/master/sample/redirect-rules-1.json) and [redirect-rules-2.json](https://github.com/oscar6echo/redirect-server-2/blob/master/sample/redirect-rules-2.json)
-+ then by order of entries in each source file
 
-If the path of a requested url, i.e. the url exluding `http://host:port/`, matches a regex, its replacement string is the new destination url. The server then sends a redirect message with code = [HTTP 301 (Moved Permamently)](https://en.wikipedia.org/wiki/HTTP_301).
+- source file - see examples [redirect-rules-1.json](https://github.com/oscar6echo/redirect-server/blob/master/sample/redirect-rules-1.json) and [redirect-rules-2.json](https://github.com/oscar6echo/redirect-server/blob/master/sample/redirect-rules-2.json)
+- then by order of entries in each source file
 
+If the path of a requested url, i.e. the url excluding `http://host:port/`, matches a regex, its replacement string is the new destination url. The server then sends a redirect message with code = [HTTP 301 (Moved Permamently)](https://en.wikipedia.org/wiki/HTTP_301).
 
 To test and learn about regex, see [regex101.com](https://regex101.com/).
-
 
 ## 2 - Install
 
@@ -43,7 +43,7 @@ $ gunicorn --config server/conf/gunicorn_conf.py server:app
 
 If you have Docker installed:
 
--   Development mode - Hot reload server upon src/ folder change
+- Development mode - Hot reload server upon src/ folder change
 
 ```bash
 # build image
@@ -54,7 +54,7 @@ $ docker run --rm -it -p 5000:5000 -v $(pwd)/src:/app/src demo-api bash
 root@id:/app# gunicorn --config src/conf/gunicorn_conf.py src:app
 ```
 
--   Production mode
+- Production mode
 
 ```bash
 # build image
@@ -65,16 +65,18 @@ $ docker run --rm -it -p 5000:5000 demo-api
 
 ## 3 - SSL certificates
 
-If corporate SSL certificates need be installed add the following lines:
+If corporate SSL certificates need be installed you may want to add those to the certify public certificates located on your system with command `certifi.where()`.
 
-+ in the [requirements.txt](requirements.txt) file:
+In the case of SG run the following for your current env.
+
+- Install package:
 
 ```bash
-# example of proprietary package
-certifi_sg
+# proprietary package
+pip install certifi_sg
 ```
 
-+ in the [__init__.py](__init__.py) file:
+- Run it:
 
 ```python
 from certifi_sg import add_sg_certificates
@@ -85,9 +87,5 @@ add_sg_certificates()
 
 ## 4 - Dev
 
-
 The frontend is a [Vue](https://vuejs.org) app built with [@vue/cli](https://cli.vuejs.org/).  
 See their doc for more info.
-
-
-
