@@ -4,17 +4,18 @@
 
 This repo contains a minimalist [Flask](http://flask.pocoo.org/docs/1.0/) redirect server.
 
-The redirection rules are initally loaded from the source files listed in the `REDIRECT_DATA` in file [general_conf.py](https://gitlab.com/oscar6echo/redirect-server/blob/master/src/conf/general_conf.py) and updated every `REFRESH_SECONDS` (defined in the same file) seconds.
+The redirect rules are initally loaded from the source files listed in the `REDIRECT_SOURCES` in file [general_conf.py](https://github.com/oscar6echo/redirect-server-2/blob/master/src/conf/general_conf.py) and updated every `REFRESH_SECONDS` (defined in the same file) seconds.
 
-Each redirection rules consists of:
-+ a [regex](https://www.regular-expressions.info/) pattern
-+ an associated [replacement string](https://www.regular-expressions.info/replacetutorial.html)
+Each redirect rule consists of:
++ A [regex](https://www.regular-expressions.info/) to match short urls
++ A route i.e. a corresponding [replacement string](https://www.regular-expressions.info/replacetutorial.html)
++ A source file from where the rule is read
 
-Redirections rules are ordered by
-+ source file - see examples [data1.json](https://gitlab.com/oscar6echo/redirect-server/blob/master/sample/data1.json) and [data2.json](https://gitlab.com/oscar6echo/redirect-server/blob/master/sample/data2.json)
+Redirect rules are ordered by
++ source file - see examples [redirect-rules-1.json](https://github.com/oscar6echo/redirect-server-2/blob/master/sample/redirect-rules-1.json) and [redirect-rules-2.json](https://github.com/oscar6echo/redirect-server-2/blob/master/sample/redirect-rules-2.json)
 + then by order of entries in each source file
 
-If the path of a requested url, i.e. the url exluding `http://host:port/`, matches a pattern, its replacement string is the new destination url. The server then sends a redirect message with code = [HTTP 301 (Moved Permamently)](https://en.wikipedia.org/wiki/HTTP_301).
+If the path of a requested url, i.e. the url exluding `http://host:port/`, matches a regex, its replacement string is the new destination url. The server then sends a redirect message with code = [HTTP 301 (Moved Permamently)](https://en.wikipedia.org/wiki/HTTP_301).
 
 
 To test and learn about regex, see [regex101.com](https://regex101.com/).
@@ -27,7 +28,7 @@ To test and learn about regex, see [regex101.com](https://regex101.com/).
 If you have Python3 installed:
 
 ```bash
-$ git clone https://gitlab.com/oscar6echo/redirect-server
+$ git clone https://github.com/oscar6echo/redirect-server
 $ cd redirect-server
 $ pip install -r requirements.txt
 # flask werkzeug - debug only
@@ -40,7 +41,7 @@ $ gunicorn --config server/conf/gunicorn_conf.py server:app
 
 ### 2.1 - Docker
 
-If you have Docker installed:s
+If you have Docker installed:
 
 -   Development mode - Hot reload server upon src/ folder change
 
@@ -81,3 +82,12 @@ from certifi_sg import add_sg_certificates
 # appends SG certificates to certifi cacerts.pem file only if not there yet
 add_sg_certificates()
 ```
+
+## 4 - Dev
+
+
+The frontend is a [Vue](https://vuejs.org) app built with [@vue/cli](https://cli.vuejs.org/).  
+See their doc for more info.
+
+
+
