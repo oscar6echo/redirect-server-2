@@ -6,6 +6,7 @@ __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 
+server.log
 test/
 
 src/*
