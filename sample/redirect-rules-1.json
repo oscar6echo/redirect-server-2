@@ -1,0 +1,14 @@
+[
+    {
+        "regex": "(ci)(.*)",
+        "route": "https://www.courrierinternational.com/article\\2"
+    },
+    {
+        "regex": "(github)(.*)",
+        "route": "https://github.com/oscar6echo\\2"
+    },
+    {
+        "regex": "(vimeo)(.*)",
+        "route": "https://vimeo.com\\2"
+    }
+]
