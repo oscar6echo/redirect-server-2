@@ -1,6 +1,5 @@
 <template>
   <div id="my-wrapper">
-    <!-- <NavBar></NavBar> -->
     <div id="my-navbar" class="d-flex flex-column align-items-center">
       <div class="d-flex justify-content-center align-items-center">
         <img id="logo" src="../assets/compass.png" />
